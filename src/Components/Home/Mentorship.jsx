@@ -1,3 +1,4 @@
+import { User2 } from 'lucide-react';
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
@@ -8,21 +9,21 @@ const Mentorship = () => {
       title: "Match with a Mentor",
       description:
         "Get paired with a professional based on your interests and career goals",
-      color: "bg-blue-600",
+      color: "bg-blue-600 hover:bg-blue-300 hover:text-gray-600 transition-all easy-in-out",
     },
     {
       id: 2,
       title: "Regular Sessions",
       description:
         "Weekly 1-on-1 sessions to discuss projects, career advice, and technical guidance",
-      color: "bg-green-500",
+      color: "bg-green-500 hover:bg-green-300 hover:text-gray-600 transition-all easy-in-out",
     },
     {
       id: 3,
       title: "Project Reviews",
       description:
         "Get feedback on your work and guidance on industry best practices",
-      color: "bg-blue-600",
+      color: "bg-blue-600 hover:bg-blue-300 hover:text-gray-600 transition-all easy-in-out",
     },
   ];
 
@@ -87,9 +88,12 @@ const Mentorship = () => {
             {mentors.map((mentor, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-md p-4 shadow hover:shadow-md transition"
+                className="bg-white rounded-md p-4 shadow hover:shadow-md hover:scale-105 transition"
               >
-                <h4 className="font-semibold">{mentor.name}</h4>
+                <div className='rounded-full'>
+                  <User2  className=" mb-4 border-2 border-gray-600  rounded-full"/>
+                </div>
+                <h4 className="font-semibold hover:font-black transition-font transition-all ease-in-out">{mentor.name}</h4>
                 <p className="text-gray-600 text-sm">{mentor.role}</p>
                 <p className="text-blue-600 text-sm font-medium">
                   {mentor.expertise}
@@ -103,12 +107,12 @@ const Mentorship = () => {
       
       <div className="mt-10 flex justify-center space-x-4">
         <NavLink to="/request-mentor">
-          <button className="px-5 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 hover:scale-105 transition-all font-semibold">
+          <button className="px-5 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-800 hover:scale-105 transition-all font-semibold">
             Request a Mentor
           </button>
         </NavLink>
         <NavLink to="/become-mentor">
-          <button className="px-5 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 hover:scale-105 transition-all font-semibold">
+          <button className="px-5 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-800 hover:scale-105 transition-all font-semibold">
             Become a Mentor
           </button>
         </NavLink>
