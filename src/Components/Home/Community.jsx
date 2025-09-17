@@ -55,7 +55,9 @@ const Community = () => {
             </div>
           ))}
         </div>
-
+        <div className='pb-12'>
+          <h3 className='font-bold text-3xl capitalize'>We expect to have these analytics in next 5 years</h3>
+        </div>
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat, index) => (

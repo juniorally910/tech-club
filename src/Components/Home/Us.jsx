@@ -3,10 +3,10 @@ import { Rocket, Users, Cog, Crown } from "lucide-react";
 
 const Us = () => {
      const values = [
-    { icon: <Rocket size={28} className="text-blue-600" />, title: "Innovation" },
-    { icon: <Users size={28} className="text-green-500" />, title: "Collaboration" },
-    { icon: <Cog size={28} className="text-blue-600" />, title: "Practical Learning" },
-    { icon: <Crown size={28} className="text-green-500" />, title: "Leadership" },
+    { icon: <Rocket size={28} className="text-blue-600 hover:rotate-12 transition-rotate hover:scale-105" />, title: "Innovation" },
+    { icon: <Users size={28} className="text-green-500 hover:rotate-12 transition-rotate hover:scale-105" />, title: "Collaboration" },
+    { icon: <Cog size={28} className="text-blue-600 hover:rotate-12 transition-rotate hover:scale-105" />, title: "Practical Learning" },
+    { icon: <Crown size={28} className="text-green-500 hover:rotate-12 transition-rotate hover:scale-105" />, title: "Leadership" },
   ];
   
   return (
@@ -18,14 +18,14 @@ const Us = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           
           <div>
-            <h3 className="text-2xl font-semibold mb-4 text-center md:text-left">Our Mission</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-center md:text-left hover:text-blue-600">Our Mission</h3>
             <p className="text-gray-600 mb-8 text-center md:text-left">
               To empower the next generation of engineers with practical skills,
               innovative thinking, and real-world experience that bridges the gap
               between academic theory and industry practice.
             </p>
 
-            <h3 className="text-2xl font-semibold mb-4 text-center md:text-left">Our Vision</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-center md:text-left hover:text-blue-600">Our Vision</h3>
             <p className="text-gray-600 text-center md:text-left">
               To be the leading platform where engineering students and professionals
               collaborate, learn, and innovate to solve the world's most pressing challenges.

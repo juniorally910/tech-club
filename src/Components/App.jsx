@@ -12,6 +12,8 @@ import Join from "./Join";
 import RequestMentor from "./RequestMentor";
 import BecomeMentor from "./BecomeMentor";
 import Footer from "./Home/Footer";
+import Login from "./Login";
+import Register from "./Register";
 
 function Home() {
   return (
@@ -42,6 +44,8 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/request-mentor" element={<RequestMentor />} />
         <Route path="/become-mentor" element={<BecomeMentor />} />
       </Routes>

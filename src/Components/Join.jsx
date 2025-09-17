@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 
 const Join = () => {
-
-    const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
+    education: "",
     program: "",
+    experience: "",
+    startDate: "",
     motivation: "",
+    referral: "",
   });
 
   const handleChange = (e) => {
@@ -17,17 +21,28 @@ const Join = () => {
     e.preventDefault();
     console.log("Join Cohort Data:", formData);
     alert("Thank you for joining the cohort!");
-    setFormData({ name: "", email: "", program: "", motivation: "" });
-  }
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      education: "",
+      program: "",
+      experience: "",
+      startDate: "",
+      motivation: "",
+      referral: "",
+    });
+  };
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 py-12">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">
           Join a Cohort
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          
+          {/* Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Name</label>
             <input
@@ -41,7 +56,7 @@ const Join = () => {
             />
           </div>
 
-         
+          {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
@@ -55,7 +70,33 @@ const Join = () => {
             />
           </div>
 
-          
+          {/* Phone */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Phone</label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your phone number"
+            />
+          </div>
+
+          {/* Education */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Education</label>
+            <input
+              type="text"
+              name="education"
+              value={formData.education}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+              placeholder="Your education background"
+            />
+          </div>
+
+          {/* Program */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Program</label>
             <select
@@ -73,7 +114,35 @@ const Join = () => {
             </select>
           </div>
 
-          
+          {/* Experience */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Experience Level</label>
+            <select
+              name="experience"
+              value={formData.experience}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select level</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </div>
+
+          {/* Start Date */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Preferred Start Date</label>
+            <input
+              type="date"
+              name="startDate"
+              value={formData.startDate}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Motivation */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Motivation</label>
             <textarea
@@ -86,7 +155,26 @@ const Join = () => {
             ></textarea>
           </div>
 
-          
+          {/* Referral */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              How did you hear about us?
+            </label>
+            <select
+              name="referral"
+              value={formData.referral}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select</option>
+              <option value="Friend/Referral">Friend/Referral</option>
+              <option value="Social Media">Social Media</option>
+              <option value="Website">Website</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          {/* Submit */}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition"
@@ -96,7 +184,7 @@ const Join = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Join
+export default Join;

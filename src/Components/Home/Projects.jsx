@@ -67,12 +67,10 @@ const Projects = () => {
               {project.icon}
               <h3 className="font-semibold text-lg">{project.title}</h3>
             </div>
-
             
-            <p className="text-sm font-medium text-green-600 mb-2">
+            <p className="text-md font-bold text-green-600 mb-2">
               {project.category}
             </p>
-
            
             <p className="text-gray-600 mb-4">{project.description}</p>
 
@@ -81,7 +79,7 @@ const Projects = () => {
               {project.tags.map((tag, i) => (
                 <span
                   key={i}
-                  className="px-3 py-1 text-sm bg-gray-100 rounded-full text-gray-700"
+                  className="px-4 py-1 text-sm bg-gray-200 hover:text-blue-600 hover:bg-gray-300 rounded-full text-gray-700"
                 >
                   {tag}
                 </span>

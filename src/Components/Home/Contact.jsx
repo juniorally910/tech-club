@@ -3,7 +3,7 @@ import { Mail, Phone, Linkedin, Instagram, Twitter } from "lucide-react";
 
 const Contact = () => {
   return (
-    <section id='contact' className="bg-white py-16">
+    <section id='contact' className="bg-white border-t-2 border-gray-100 py-16">
       <div className="max-w-6xl mx-auto px-6">
         {/* Heading */}
         <div className="text-center mb-12">
@@ -27,7 +27,7 @@ const Contact = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="text-green-600" size={18} />
-                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                <a href="tel:+15551234567">+250 (7xx) xxx xxx</a>
               </li>
               <li className="flex items-center gap-2">
                 <Linkedin className="text-blue-700" size={18} />
