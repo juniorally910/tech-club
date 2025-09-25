@@ -1,22 +1,35 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar";
-import Hero from "./Home/Hero";
-import Features from "./Home/Features";
-import About from "./Home/Us";
-import Programs from "./Home/Programs";
-import Projects from "./Home/Projects";
-import Mentorship from "./Home/Mentorship";
-import Community from "./Home/Community";
-import Contact from "./Home/Contact";
-import Join from "./Join";
-import RequestMentor from "./RequestMentor";
-import BecomeMentor from "./BecomeMentor";
-import Footer from "./Home/Footer";
-import Login from "./Login";
-import Register from "./Register";
+import { useLocation } from "react-router-dom";
+import Navbar from "./User/Navbar";
+import Hero from "./User/Home/Hero";
+import Features from "./User/Home/Features";
+import About from './User/Us';
+import Programs from "./User/Home/Programs";
+import Projects from "./User/Home/Projects";
+import Mentorship from "./User/Home/Mentorship";
+import Community from "./User/Home/Community";
+import Contact from "./User/Contact";
+import Join from "./User/Join";
+import RequestMentor from "./User/RequestMentor";
+import BecomeMentor from "./User/BecomeMentor";
+import Footer from "./User/Home/Footer";
+import Login from "./User/Login";
+import Register from "./User/Register";
+
+// Dashboard
+import Dashboard from "./Dashboard/Dashboard";
+import DashboardHome from "./Dashboard/DashboardHome";
+import AdminPrograms from "./Dashboard/Programs";
+import AdminProjects from "./Dashboard/Projects";
+import Cohorts from "./Dashboard/Cohorts";
+import MentorshipPage from "./Dashboard/MentorshipPage";
+import SettingsPage from "./Dashboard/SettingsPage"
 
 function Home() {
+
+ 
   return (
+    
     <>
       <section id="hero"><Hero /></section>
       <section id="features"><Features /></section>
@@ -32,10 +45,13 @@ function Home() {
 }
 
 function App() {
+   const location = useLocation();
+  const hideNavbar = location.pathname.startsWith("/dashboard");
   return (
     <>
-      <Navbar />
+      {!hideNavbar && <Navbar />}
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/programs" element={<Programs />} />
@@ -48,6 +64,16 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/request-mentor" element={<RequestMentor />} />
         <Route path="/become-mentor" element={<BecomeMentor />} />
+
+        {/* Dashboard layout with nested routes */}
+        <Route path="/dashboard/*" element={<Dashboard />}>
+          <Route index element={<DashboardHome />} /> {/* default dashboard */}
+          <Route path="programs" element={<AdminPrograms />} />
+          <Route path="projects" element={<AdminProjects />} />
+          <Route path="cohorts" element={<Cohorts />} />
+          <Route path="mentorship" element={<MentorshipPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+        </Route>
       </Routes>
     </>
   );
