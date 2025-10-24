@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Join = () => {
+const Join = ({cohortId}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,8 +19,28 @@ const Join = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Join Cohort Data:", formData);
-    alert("Thank you for joining the cohort!");
+    // console.log("Join Cohort Data:", formData);
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    fetch(`${apiUrl}/api/cohort/join`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({...formData, cohortId}),
+    })
+      .then((response) => { 
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Cohort join successful:", data);
+      })
+      .catch((error) => {
+        console.error("Error joining cohort:", error);
+      });
+
     setFormData({
       name: "",
       email: "",
@@ -32,6 +52,7 @@ const Join = () => {
       motivation: "",
       referral: "",
     });
+    alert("Thank you for joining the cohort!");
   };
 
   return (
@@ -40,11 +61,10 @@ const Join = () => {
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">
           Join a Cohort
         </h2>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Name</label>
+            <label className="block text-md mb-1 font-semibold text-gray-800">Name</label>
             <input
               type="text"
               name="name"
@@ -55,10 +75,9 @@ const Join = () => {
               placeholder="Enter your name"
             />
           </div>
-
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-md mb-1 font-semibold text-gray-800">Email</label>
             <input
               type="email"
               name="email"
@@ -69,10 +88,9 @@ const Join = () => {
               placeholder="Enter your email"
             />
           </div>
-
           {/* Phone */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Phone</label>
+            <label className="block text-md mb-1 font-semibold text-gray-800">Phone</label>
             <input
               type="tel"
               name="phone"
@@ -82,10 +100,9 @@ const Join = () => {
               placeholder="Enter your phone number"
             />
           </div>
-
           {/* Education */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Education</label>
+            <label className="block text-md mb-1 font-semibold text-gray-800">Education</label>
             <input
               type="text"
               name="education"
@@ -98,7 +115,7 @@ const Join = () => {
 
           {/* Program */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Program</label>
+            <label className="block text-md mb-1 font-semibold text-gray-800">Program</label>
             <select
               name="program"
               value={formData.program}
@@ -116,7 +133,7 @@ const Join = () => {
 
           {/* Experience */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Experience Level</label>
+            <label className="block text-md mb-1 font-semibold text-gray-800">Experience Level</label>
             <select
               name="experience"
               value={formData.experience}
@@ -132,7 +149,7 @@ const Join = () => {
 
           {/* Start Date */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Preferred Start Date</label>
+            <label className="block text-md mb-1 font-semibold text-gray-800">Preferred Start Date</label>
             <input
               type="date"
               name="startDate"
@@ -144,7 +161,7 @@ const Join = () => {
 
           {/* Motivation */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Motivation</label>
+            <label className="block text-md mb-1 font-semibold text-gray-800">Motivation</label>
             <textarea
               name="motivation"
               value={formData.motivation}
@@ -157,7 +174,7 @@ const Join = () => {
 
           {/* Referral */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-md mb-1 font-semibold text-gray-800">
               How did you hear about us?
             </label>
             <select
@@ -177,7 +194,7 @@ const Join = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition"
+            className="w-full bg-blue-600 text-white py-2 my-8 rounded-md font-semibold hover:bg-blue-700 transition"
           >
             Join Cohort
           </button>

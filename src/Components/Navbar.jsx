@@ -10,7 +10,7 @@ const Navbar = () => {
     { to: "/about", label: "About" },
     { to: "/programs", label: "Programs" },
     { to: "/projects", label: "Projects" },
-    { to: "/mentorship", label: "Mentorship" },
+    // { to: "/mentorship", label: "Mentorship" },
     { to: "/community", label: "Community" },
     { to: "/contact", label: "Contact" },
   ];
@@ -43,8 +43,8 @@ const Navbar = () => {
 
         
         <NavLink to="/register" className="hidden sm:inline">
-          <button className="ml-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-800 transition">
-            Join Cohort
+          <button className="ml-4 px-6 py-2 border-2 border-blue-600 duration-300 hover:text-white rounded-full hover:bg-blue-800 transition ease-in-out font-semibold">
+            Sign up
           </button>
         </NavLink>
 

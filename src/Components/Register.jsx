@@ -9,6 +9,7 @@ const Register = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,17 +25,18 @@ const Register = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
+      setLoading(true);
       const data = await res.json();
       if (!res.ok) {
         setMessage(data.message || "Failed to send OTP");
         return;
       }
       setOtpSent(true);
-      setMessage("✅ OTP sent! Check your email.");
+      setMessage("OTP sent! Please check your email.");
     } catch (error) {
       console.error(error);
       setMessage("Server error sending OTP");
+      setLoading(false);
     }
   };
 
@@ -55,10 +57,9 @@ const Register = () => {
         return;
       }
 
-      // ✅ store token from backend
       localStorage.setItem("token", data.token);
 
-      setMessage("✅ Registration successful!");
+      setMessage("Registration successful!");
       navigate("/login");
     } catch (error) {
       console.error(error);
@@ -67,7 +68,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-600 to-pink-600">
+    <div className="flex items-center px-6 md:px-0 justify-center min-h-screen bg-gradient-to-r from-purple-600 to-pink-600">
       <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Register / Create Account
@@ -87,7 +88,7 @@ const Register = () => {
               value={form.password} onChange={handleChange}
               className="w-full px-4 py-2 border rounded-lg" />
             <button type="submit" className="w-full bg-pink-600 text-white py-2 rounded-lg">
-              Send OTP
+              { loading ? "Sending OTP..." : "Register" }
             </button>
           </form>
         ) : (

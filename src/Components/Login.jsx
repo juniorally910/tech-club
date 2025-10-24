@@ -7,6 +7,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -34,7 +35,7 @@ const Login = () => {
       localStorage.setItem("token", data.token);
 
       // Redirect after login
-      navigate("/join");
+      navigate("/cohorts");
     } catch (error) {
       console.error("❌ Login error:", error.message);
       alert(error.message);
@@ -42,7 +43,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 to-purple-700">
+    <div className="flex items-center justify-center px-6 md:px-0 min-h-screen bg-gradient-to-r from-blue-600 to-purple-700">
       <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Sign In
@@ -70,7 +71,7 @@ const Login = () => {
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
           >
-            Login
+            { loading ? "Signing In..." : "Sign In" }
           </button>
         </form>
 

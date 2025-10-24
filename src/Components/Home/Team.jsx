@@ -56,7 +56,7 @@ const Mentorship = () => {
      <section id='mentorship' className="py-12 px-6 md:px-16">
     
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold">Mentorship Program</h2>
+        <h2 className="text-3xl font-bold">Meet our Team</h2>
         <p className="text-gray-600 mt-2">
           Connect with industry professionals and experienced alumni who guide
           your learning journey
@@ -64,31 +64,9 @@ const Mentorship = () => {
       </div>
 
       
-      <div className="grid md:grid-cols-2 gap-8">
-        
-        <div>
-          <h3 className="font-semibold text-lg mb-6">How It Works</h3>
-          <div className="space-y-6">
-            {steps.map((step) => (
-              <div key={step.id} className="flex items-start space-x-4">
-                <div
-                  className={`${step.color} text-white w-7 h-7 flex items-center justify-center rounded-full font-bold`}
-                >
-                  {step.id}
-                </div>
-                <div>
-                  <h4 className="font-semibold">{step.title}</h4>
-                  <p className="text-gray-600">{step.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-     
-        <div className="bg-gray-100 rounded-lg p-6">
-          <h3 className="font-semibold text-lg mb-6">Featured Mentors</h3>
-          <div className="space-y-4">
+      <div className="space-y-8">
+                  <h3 className="font-semibold text-lg mb-6 text-center">Featured Our Team</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {mentors.map((mentor, idx) => (
               <div
                 key={idx}
@@ -102,24 +80,12 @@ const Mentorship = () => {
                 <p className="text-blue-600 text-sm font-medium">
                   {mentor.expertise}
                 </p>
+                <p className="text-sm font-medium mt-6 italic">
+                 Tel: {mentor.phone}
+                </p>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      
-      <div className="mt-10 flex justify-center space-x-4">
-        <NavLink to="/request-mentor">
-          <button className="px-5 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-800 hover:scale-105 transition-all font-semibold">
-            Request a Mentor
-          </button>
-        </NavLink>
-        <NavLink to="/become-mentor">
-          <button className="px-5 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-800 hover:scale-105 transition-all font-semibold">
-            Become a Mentor
-          </button>
-        </NavLink>
       </div>
     </section>
   )
