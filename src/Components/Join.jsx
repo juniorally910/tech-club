@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
 
-const Join = ({cohortId}) => {
+const Join = ({ cohortId }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,107 +14,88 @@ const Join = ({cohortId}) => {
     referral: "",
   });
 
+  const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("Join Cohort Data:", formData);
+    setSubmitting(true);
+    setMessage("");
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
-    fetch(`${apiUrl}/api/cohort/join`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({...formData, cohortId}),
-    })
-      .then((response) => { 
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Cohort join successful:", data);
-      })
-      .catch((error) => {
-        console.error("Error joining cohort:", error);
-      });
+    const token = localStorage.getItem("token"); 
 
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      education: "",
-      program: "",
-      experience: "",
-      startDate: "",
-      motivation: "",
-      referral: "",
-    });
-    alert("Thank you for joining the cohort!");
+    try {
+      const res = await axios.post(
+        `${apiUrl}/api/cohort/join`,
+        { ...formData, cohortId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setMessage(res.data.message || "Successfully application sent!");
+
+      // Reset form and message after a delay
+      
+      setTimeout(() => {
+        setMessage("");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          education: "",
+          program: "",
+          experience: "",
+          startDate: "",
+          motivation: "",
+          referral: "",
+        });
+      }, 2000);
+    } catch (err) {
+      console.error("Error joining cohort:", err);
+      setMessage(err.response?.data?.message || "Application failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 py-12">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">
-          Join a Cohort
-        </h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Join a Cohort</h2>
+        {message && (
+          <p
+            className={`text-center mb-4 font-semibold ${
+              message.toLowerCase().includes("success") ? "text-green-600" : "text-red-600"
+            }`}
+          >
+            {message}
+          </p>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name */}
-          <div>
-            <label className="block text-md mb-1 font-semibold text-gray-800">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your name"
-            />
-          </div>
-          {/* Email */}
-          <div>
-            <label className="block text-md mb-1 font-semibold text-gray-800">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
-            />
-          </div>
-          {/* Phone */}
-          <div>
-            <label className="block text-md mb-1 font-semibold text-gray-800">Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your phone number"
-            />
-          </div>
-          {/* Education */}
-          <div>
-            <label className="block text-md mb-1 font-semibold text-gray-800">Education</label>
-            <input
-              type="text"
-              name="education"
-              value={formData.education}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-              placeholder="Your education background"
-            />
-          </div>
+          {/** Map through form fields for cleaner code */}
+          {[
+            { label: "Name", name: "name", type: "text", required: true },
+            { label: "Email", name: "email", type: "email", required: true },
+            { label: "Phone", name: "phone", type: "tel" },
+            { label: "Education", name: "education", type: "text" },
+            { label: "Start Date", name: "startDate", type: "date" },
+          ].map((field) => (
+            <div key={field.name}>
+              <label className="block text-md mb-1 font-semibold text-gray-800">{field.label}</label>
+              <input
+                type={field.type}
+                name={field.name}
+                value={formData[field.name]}
+                onChange={handleChange}
+                required={field.required}
+                className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          ))}
 
-          {/* Program */}
+          {/* Program select */}
           <div>
             <label className="block text-md mb-1 font-semibold text-gray-800">Program</label>
             <select
@@ -147,18 +129,6 @@ const Join = ({cohortId}) => {
             </select>
           </div>
 
-          {/* Start Date */}
-          <div>
-            <label className="block text-md mb-1 font-semibold text-gray-800">Preferred Start Date</label>
-            <input
-              type="date"
-              name="startDate"
-              value={formData.startDate}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
           {/* Motivation */}
           <div>
             <label className="block text-md mb-1 font-semibold text-gray-800">Motivation</label>
@@ -166,17 +136,15 @@ const Join = ({cohortId}) => {
               name="motivation"
               value={formData.motivation}
               onChange={handleChange}
-              rows="3"
+              rows={3}
               className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
               placeholder="Why do you want to join?"
-            ></textarea>
+            />
           </div>
 
           {/* Referral */}
           <div>
-            <label className="block text-md mb-1 font-semibold text-gray-800">
-              How did you hear about us?
-            </label>
+            <label className="block text-md mb-1 font-semibold text-gray-800">How did you hear about us?</label>
             <select
               name="referral"
               value={formData.referral}
@@ -194,9 +162,12 @@ const Join = ({cohortId}) => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 my-8 rounded-md font-semibold hover:bg-blue-700 transition"
+            disabled={submitting}
+            className={`w-full py-2 my-8 rounded-md font-semibold text-white ${
+              submitting ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+            } transition`}
           >
-            Join Cohort
+            {submitting ? "Joining..." : "Join Cohort"}
           </button>
         </form>
       </div>

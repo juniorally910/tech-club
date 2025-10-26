@@ -33,7 +33,7 @@ const Login = () => {
       }
 
       localStorage.setItem("token", data.token);
-
+      localStorage.setItem("user", JSON.stringify(data.user));
       // Redirect after login
       navigate("/cohorts");
     } catch (error) {

@@ -10,13 +10,16 @@ const Cohorts = () => {
 
   useEffect(() => {
     const fetchCohorts = async () => {
+     const token = localStorage.getItem("token");
       try {
         const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
-        const res = await axios.get(`${apiUrl}/api/cohort-inform`);
+        const res = await axios.get(`${apiUrl}/api/cohort-inform`,{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+        });
         console.log("Cohorts API response:", res.data);
-
-        // Use the correct key based on your backend
-        // It could be res.data.cohorts or res.data.cohort
         setCohorts(res.data.cohorts || []);
       } catch (err) {
         console.error("Error fetching cohorts:", err);

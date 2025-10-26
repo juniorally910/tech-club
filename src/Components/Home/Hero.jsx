@@ -16,7 +16,7 @@ const Hero = () => {
 
         <div className="flex flex-col md:flex-row justify-center gap-4">
           <NavLink to="/login">
-            <button className="bg-amber-800 hover:bg-amber-950 text-white font-semibold py-3 px-6 rounded-md shadow-md transition w-full  md:w-auto md:mx-auto">
+            <button className="bg-blue-600 hover:bg-blue-800 text-white font-semibold py-3 px-6 rounded-md shadow-md transition w-full  md:w-auto md:mx-auto">
               Join a Cohort
             </button>
           </NavLink>
@@ -25,11 +25,7 @@ const Hero = () => {
               View Programs
             </button>
           </NavLink>
-          <NavLink to="/">
-          <button className="border-2 border-white text-white hover:bg-white hover:text-green-600 font-semibold py-3 px-6 rounded-md shadow-md transition w-full md:w-auto">
-            Get Involved
-          </button>
-          </NavLink>
+          
         </div>
       </div>
     </section>

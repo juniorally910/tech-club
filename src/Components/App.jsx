@@ -9,8 +9,8 @@ import Team from "./Home/Team";
 import Community from "./Home/Community";
 import Contact from "./Home/Contact";
 import Join from "./Join";
-import RequestMentor from "./RequestMentor";
-import BecomeMentor from "./BecomeMentor";
+// import RequestMentor from "./RequestMentor";
+// import BecomeMentor from "./BecomeMentor";
 import Footer from "./Home/Footer";
 import Login from "./Login";
 import Register from "./Register";
@@ -36,6 +36,7 @@ function Home() {
 function App() {
   return (
     <>
+ 
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
