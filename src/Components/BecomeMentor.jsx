@@ -8,7 +8,6 @@ const BecomeMentor = () => {
   const handleSubmit = e => {
     e.preventDefault();
     setSubmitted(true);
-    // add API call here
   };
 
   return (

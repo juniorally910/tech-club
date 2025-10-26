@@ -43,7 +43,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/programs" element={<Programs />} />
         <Route path="/projects" element={<Projects />} />
-        {/* <Route path="/mentorship" element={<Mentorship />} /> */}
         <Route path="/team" element={<Team />} />
         <Route path="/community" element={<Community />} />
         <Route path="/contact" element={<Contact />} />
@@ -52,8 +51,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/cohorts" element={<Cohorts />} />
         <Route path="/cohorts/:id" element={<JoinCohort />} />
-        {/* <Route path="/request-mentor" element={<RequestMentor />} /> */}
-        {/* <Route path="/become-mentor" element={<BecomeMentor />} /> */}
       </Routes>
     </>
   );
